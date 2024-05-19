@@ -1,9 +1,8 @@
 package io.github.sploit.projects.taskmanager.task;
 
-import java.time.LocalDate;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import io.github.sploit.projects.taskmanager.common.dtos.TitledDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,19 +12,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class TaskDto {
-    @JsonProperty("id")
-    private Long id;
-
-    @JsonProperty("title")
-    private String title;
-
+public class TaskDto extends TitledDto {
     @JsonProperty("description")
     private String description;
-
-    @JsonProperty("createdAt")
-    private LocalDate createdAt;
-
-    @JsonProperty("updatedAt")
-    private LocalDate updatedAt;
 }
