@@ -1,4 +1,4 @@
-package io.github.sploit.projects.taskmanager.common;
+package io.github.sploit.projects.taskmanager.common.exceptions;
 
 public class NotFoundException extends RuntimeException {
     public NotFoundException(Long id) {

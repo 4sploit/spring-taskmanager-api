@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.github.sploit.projects.taskmanager.common.ApiController;
+import io.github.sploit.projects.taskmanager.common.controllers.ApiController;
 
 @RestController
 @RequestMapping("/api/task")

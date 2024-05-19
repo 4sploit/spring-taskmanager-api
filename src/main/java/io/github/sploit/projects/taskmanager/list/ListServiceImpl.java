@@ -4,7 +4,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
-import io.github.sploit.projects.taskmanager.common.NotFoundException;
+import io.github.sploit.projects.taskmanager.common.exceptions.NotFoundException;
 
 @Service
 public class ListServiceImpl implements ListService {

@@ -1,4 +1,4 @@
-package io.github.sploit.projects.taskmanager.common;
+package io.github.sploit.projects.taskmanager.common.services;
 
 import java.util.List;
 

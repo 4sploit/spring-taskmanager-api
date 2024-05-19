@@ -1,4 +1,4 @@
-package io.github.sploit.projects.taskmanager.common;
+package io.github.sploit.projects.taskmanager.common.controllers;
 
 import java.util.List;
 
