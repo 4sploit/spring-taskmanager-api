@@ -1,6 +1,6 @@
 spring:
-    datasource:
-        url: jdbc:mysql://${MYSQL_SERVER_URL:10.0.0.12}:${MYSQL_SERVER_PORT:3306}/${MYSQL_DB_NAME:taskmanagerdb}
-        username: ${MYSQL_USER:mysql}
-        password: ${MYSQL_pass:mysql}
-        driver-class-name: com.mysql.cj.jdbc.Driver
+  datasource:
+    url: jdbc:mysql://${MYSQL_SERVER_URL:10.0.0.12}:${MYSQL_SERVER_PORT:3306}/${MYSQL_DB_NAME:taskmanagerdb}
+    username: ${MYSQL_USER:mysql}
+    password: ${MYSQL_pass:mysql}
+    driver-class-name: com.mysql.cj.jdbc.Driver

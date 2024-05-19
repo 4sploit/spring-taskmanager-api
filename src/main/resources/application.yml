@@ -1,12 +1,12 @@
 spring:
-    profiles:
-        active: "dev,mysql"
-    application:
-        name: ${APP_NAME:taskmanager}
-    data:
-        rest:
-            basePath: /api
-    jpa:
-        hibernate:
-            ddl-auto: update
-        open-in-view: false
+  profiles:
+    active: "dev,mysql"
+  application:
+    name: ${APP_NAME:taskmanager}
+  data:
+    rest:
+      basePath: /api
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
