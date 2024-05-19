@@ -12,5 +12,5 @@ import lombok.Setter;
 public class TitledEntity extends BaseEntity {
     @NonNull
     @Column(name = "title")
-	private String title;
+    private String title;
 }

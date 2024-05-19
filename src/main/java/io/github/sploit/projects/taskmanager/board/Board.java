@@ -15,7 +15,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-
 @Getter
 @Setter
 @NoArgsConstructor
@@ -24,6 +23,6 @@ import lombok.ToString;
 @Table(name = "boards")
 public class Board extends TitledEntity {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn(name = "board_id")
+    @JoinColumn(name = "board_id")
     private java.util.List<List> lists = new ArrayList<>();
 }

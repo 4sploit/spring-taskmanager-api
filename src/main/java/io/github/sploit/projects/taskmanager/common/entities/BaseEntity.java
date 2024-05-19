@@ -17,9 +17,9 @@ import lombok.Setter;
 @Setter
 @MappedSuperclass
 public class BaseEntity implements Serializable {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column(name = "created_at", updatable = false)
     @DateTimeFormat(pattern = "dd-MM-yyyy")

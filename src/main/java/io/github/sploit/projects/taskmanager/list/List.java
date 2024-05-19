@@ -23,6 +23,6 @@ import lombok.ToString;
 @Table(name = "lists")
 public class List extends TitledEntity {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn(name = "list_id")
+    @JoinColumn(name = "list_id")
     private java.util.List<Task> tasks = new ArrayList<>();
 }
