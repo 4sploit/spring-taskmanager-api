@@ -1,0 +1,5 @@
+server:
+    port: ${SERVER_PORT:4444}
+# springdoc:
+#     packages-to-scan: /api/*
+    # enable-default-api-docs: false
