@@ -22,9 +22,6 @@ public class ListDto {
     @JsonProperty("title")
     private String title;
 
-    // @JsonProperty("board")
-    // private BoardDto board;
-
     @JsonProperty("tasks")
     private Set<TaskDto> tasks;
 

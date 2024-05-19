@@ -23,9 +23,6 @@ public class TaskDto {
     @JsonProperty("description")
     private String description;
 
-    // @JsonProperty("list")
-    // private ListDto list;
-
     @JsonProperty("createdAt")
     private LocalDate createdAt;
 
