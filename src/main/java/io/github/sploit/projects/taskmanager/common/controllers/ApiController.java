@@ -7,7 +7,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 
-public interface ApiController<Request, Response, ID> {
+import io.github.sploit.projects.taskmanager.common.dtos.BaseDto;
+
+public interface ApiController<Request extends BaseDto, Response extends BaseDto, ID> {
     @GetMapping("/getAll")
     List<Response> getAll();
     @GetMapping("/getById/id")
