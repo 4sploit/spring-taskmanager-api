@@ -1,8 +1,8 @@
 package io.github.sploit.projects.taskmanager.common.entities;
 
-import io.micrometer.common.lang.NonNull;
 import jakarta.persistence.Column;
 import jakarta.persistence.MappedSuperclass;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,7 +10,7 @@ import lombok.Setter;
 @Setter
 @MappedSuperclass
 public class TitledEntity extends BaseEntity {
-    @NonNull
+    @NotBlank
     @Column(name = "title")
     private String title;
 }
