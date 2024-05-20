@@ -7,12 +7,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.github.sploit.projects.taskmanager.common.dtos.TitledDto;
 import io.github.sploit.projects.taskmanager.list.ListDto;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
-@NoArgsConstructor
 public class BoardDto extends TitledDto {
     @JsonProperty("lists")
     private Set<ListDto> lists;
