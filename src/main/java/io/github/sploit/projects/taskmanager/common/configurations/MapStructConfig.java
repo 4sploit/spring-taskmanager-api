@@ -13,6 +13,6 @@ import org.mapstruct.ReportingPolicy;
     unmappedSourcePolicy = ReportingPolicy.ERROR,
     unmappedTargetPolicy = ReportingPolicy.ERROR
 )
-public interface MapConfig {
+public interface MapStructConfig {
 }
 
