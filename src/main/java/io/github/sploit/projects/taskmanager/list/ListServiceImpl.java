@@ -48,13 +48,13 @@ public class ListServiceImpl implements ListService {
     public ListDto update(Long id, ListDto dto) {
         return listRepository.findById(id)
                     .map(list -> {
-                        list.setTitle(dto.getTitle());
+                        listMapper.updateEntityFromDto(dto, list);
                         List updatedList = listRepository.save(list);
                         return listMapper.entityToDto(updatedList);
                     })
                     .orElseGet(() -> {
                         List listToAdd = new List();
-                        listToAdd.setTitle(dto.getTitle());
+                        listMapper.updateEntityFromDto(dto, listToAdd);
                         List newList = listRepository.save(listToAdd);
                         return listMapper.entityToDto(newList);
                     });

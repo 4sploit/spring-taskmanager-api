@@ -13,8 +13,8 @@ public class BoardServiceImpl implements BoardService {
     private final BoardMapper boardMapper;
 
     BoardServiceImpl(
-        BoardRepository boardRepository,
-        BoardMapper boardMapper) {
+            BoardRepository boardRepository,
+            BoardMapper boardMapper) {
         this.boardRepository = boardRepository;
         this.boardMapper = boardMapper;
     }
@@ -22,27 +22,26 @@ public class BoardServiceImpl implements BoardService {
     @Override
     public List<BoardDto> getAll() {
         return boardRepository.findAll()
-                    .stream()
-                    .map(board -> {
-                        return boardMapper.entityToDto(board);
-                     })
-                     .collect(Collectors.toList());
+                .stream()
+                .map(board -> {
+                    return boardMapper.entityToDto(board);
+                })
+                .collect(Collectors.toList());
     }
 
     @Override
     public BoardDto getById(Long id) {
         return boardRepository.findById(id)
-                    .stream()
-                    .map(board -> boardMapper.entityToDto(board))
-                    .findFirst()
-                    .orElseThrow(() -> new NotFoundException(id));
+                .stream()
+                .map(board -> boardMapper.entityToDto(board))
+                .findFirst()
+                .orElseThrow(() -> new NotFoundException(id));
     }
 
     @Override
     public BoardDto add(BoardDto dto) {
         Board newBoard = boardRepository.save(
-            boardMapper.dtoToEntity(dto)
-        );
+                boardMapper.dtoToEntity(dto));
 
         return boardMapper.entityToDto(newBoard);
     }
@@ -50,17 +49,17 @@ public class BoardServiceImpl implements BoardService {
     @Override
     public BoardDto update(Long id, BoardDto dto) {
         return boardRepository.findById(id)
-                    .map(board -> {
-                        board.setTitle(dto.getTitle());
-                        Board updatedBoard = boardRepository.save(board);
-                        return boardMapper.entityToDto(updatedBoard);
-                    })
-                    .orElseGet(() -> {
-                        Board boardToAdd = new Board();
-                        boardToAdd.setTitle(dto.getTitle());
-                        Board newBoard = boardRepository.save(boardToAdd);
-                        return boardMapper.entityToDto(newBoard);
-                    });
+                .map(board -> {
+                    boardMapper.updateEntityFromDto(dto, board);
+                    Board updatedBoard = boardRepository.save(board);
+                    return boardMapper.entityToDto(updatedBoard);
+                })
+                .orElseGet(() -> {
+                    Board boardToAdd = new Board();
+                    boardMapper.updateEntityFromDto(dto, boardToAdd);
+                    Board newBoard = boardRepository.save(boardToAdd);
+                    return boardMapper.entityToDto(newBoard);
+                });
     }
 
     @Override

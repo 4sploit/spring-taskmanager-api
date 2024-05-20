@@ -13,8 +13,8 @@ public class TaskServiceImpl implements TaskService {
     private final TaskMapper taskMapper;
 
     TaskServiceImpl(
-        TaskRepository taskRepository,
-        TaskMapper taskMapper) {
+            TaskRepository taskRepository,
+            TaskMapper taskMapper) {
         this.taskRepository = taskRepository;
         this.taskMapper = taskMapper;
     }
@@ -22,25 +22,24 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public List<TaskDto> getAll() {
         return taskRepository.findAll()
-                    .stream()
-                    .map(task -> taskMapper.entityToDto(task))
-                     .collect(Collectors.toList());
+                .stream()
+                .map(task -> taskMapper.entityToDto(task))
+                .collect(Collectors.toList());
     }
 
     @Override
     public TaskDto getById(Long id) {
         return taskRepository.findById(id)
-                    .stream()
-                    .map(task -> taskMapper.entityToDto(task))
-                    .findFirst()
-                    .orElseThrow(() -> new NotFoundException(id));
+                .stream()
+                .map(task -> taskMapper.entityToDto(task))
+                .findFirst()
+                .orElseThrow(() -> new NotFoundException(id));
     }
 
     @Override
     public TaskDto add(TaskDto dto) {
         Task newTask = taskRepository.save(
-            taskMapper.dtoToEntity(dto)
-        );
+                taskMapper.dtoToEntity(dto));
 
         return taskMapper.entityToDto(newTask);
     }
@@ -48,18 +47,17 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public TaskDto update(Long id, TaskDto dto) {
         return taskRepository.findById(id)
-                    .map(task -> {
-                        task.setTitle(dto.getTitle());
-                        Task updatedTask = taskRepository.save(task);
-                        return taskMapper.entityToDto(updatedTask);
-                    })
-                    .orElseGet(() -> {
-                        Task taskToAdd = new Task();
-                        taskToAdd.setTitle(dto.getTitle());
-                        taskToAdd.setDescription(dto.getDescription());
-                        Task newTask = taskRepository.save(taskToAdd);
-                        return taskMapper.entityToDto(newTask);
-                    });
+                .map(task -> {
+                    taskMapper.updateEntityFromDto(dto, task);
+                    Task updatedTask = taskRepository.save(task);
+                    return taskMapper.entityToDto(updatedTask);
+                })
+                .orElseGet(() -> {
+                    Task taskToAdd = new Task();
+                    taskMapper.updateEntityFromDto(dto, taskToAdd);
+                    Task newTask = taskRepository.save(taskToAdd);
+                    return taskMapper.entityToDto(newTask);
+                });
     }
 
     @Override
