@@ -12,6 +12,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class BoardDto extends TitledDto {
-    @JsonProperty("lists")
+    @JsonProperty(value = "lists", access = JsonProperty.Access.READ_ONLY)
     private Set<ListDto> lists;
 }
