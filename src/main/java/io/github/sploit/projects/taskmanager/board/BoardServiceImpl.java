@@ -24,7 +24,7 @@ public class BoardServiceImpl implements BoardService {
         return boardRepository.findAll()
                     .stream()
                     .map(board -> {
-                        return boardMapper.toBoardDto(board);
+                        return boardMapper.entityToDto(board);
                      })
                      .collect(Collectors.toList());
     }
@@ -33,7 +33,7 @@ public class BoardServiceImpl implements BoardService {
     public BoardDto getById(Long id) {
         return boardRepository.findById(id)
                     .stream()
-                    .map(board -> boardMapper.toBoardDto(board))
+                    .map(board -> boardMapper.entityToDto(board))
                     .findFirst()
                     .orElseThrow(() -> new NotFoundException(id));
     }
@@ -41,10 +41,10 @@ public class BoardServiceImpl implements BoardService {
     @Override
     public BoardDto add(BoardDto dto) {
         Board newBoard = boardRepository.save(
-            boardMapper.toBoard(dto)
+            boardMapper.dtoToEntity(dto)
         );
 
-        return boardMapper.toBoardDto(newBoard);
+        return boardMapper.entityToDto(newBoard);
     }
 
     @Override
@@ -53,13 +53,13 @@ public class BoardServiceImpl implements BoardService {
                     .map(board -> {
                         board.setTitle(dto.getTitle());
                         Board updatedBoard = boardRepository.save(board);
-                        return boardMapper.toBoardDto(updatedBoard);
+                        return boardMapper.entityToDto(updatedBoard);
                     })
                     .orElseGet(() -> {
                         Board boardToAdd = new Board();
                         boardToAdd.setTitle(dto.getTitle());
                         Board newBoard = boardRepository.save(boardToAdd);
-                        return boardMapper.toBoardDto(newBoard);
+                        return boardMapper.entityToDto(newBoard);
                     });
     }
 

@@ -22,7 +22,7 @@ public class ListServiceImpl implements ListService {
     public java.util.List<ListDto> getAll() {
         return listRepository.findAll()
                     .stream()
-                    .map(list -> listMapper.toListDto(list))
+                    .map(list -> listMapper.entityToDto(list))
                      .collect(Collectors.toList());
     }
 
@@ -30,7 +30,7 @@ public class ListServiceImpl implements ListService {
     public ListDto getById(Long id) {
         return listRepository.findById(id)
                     .stream()
-                    .map(list -> listMapper.toListDto(list))
+                    .map(list -> listMapper.entityToDto(list))
                     .findFirst()
                     .orElseThrow(() -> new NotFoundException(id));
     }
@@ -38,10 +38,10 @@ public class ListServiceImpl implements ListService {
     @Override
     public ListDto add(ListDto dto) {
         List newList = listRepository.save(
-            listMapper.toList(dto)
+            listMapper.dtoToEntity(dto)
         );
 
-        return listMapper.toListDto(newList);
+        return listMapper.entityToDto(newList);
     }
 
     @Override
@@ -50,13 +50,13 @@ public class ListServiceImpl implements ListService {
                     .map(list -> {
                         list.setTitle(dto.getTitle());
                         List updatedList = listRepository.save(list);
-                        return listMapper.toListDto(updatedList);
+                        return listMapper.entityToDto(updatedList);
                     })
                     .orElseGet(() -> {
                         List listToAdd = new List();
                         listToAdd.setTitle(dto.getTitle());
                         List newList = listRepository.save(listToAdd);
-                        return listMapper.toListDto(newList);
+                        return listMapper.entityToDto(newList);
                     });
     }
 

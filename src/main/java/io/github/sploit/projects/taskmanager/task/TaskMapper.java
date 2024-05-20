@@ -1,14 +1,10 @@
 package io.github.sploit.projects.taskmanager.task;
 
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants.ComponentModel;
 
+import io.github.sploit.projects.taskmanager.common.mappers.BaseMapper;
 
 @Mapper(componentModel = ComponentModel.SPRING)
-public interface TaskMapper {
-    @Mapping(source="createDate", target = "createdAt")
-    @Mapping(source="updateDate", target = "updatedAt")
-    TaskDto toTaskDto(Task board);
-    Task toTask(TaskDto board);
+public interface TaskMapper extends BaseMapper<Task, TaskDto> {
 }

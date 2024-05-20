@@ -23,7 +23,7 @@ public class TaskServiceImpl implements TaskService {
     public List<TaskDto> getAll() {
         return taskRepository.findAll()
                     .stream()
-                    .map(task -> taskMapper.toTaskDto(task))
+                    .map(task -> taskMapper.entityToDto(task))
                      .collect(Collectors.toList());
     }
 
@@ -31,7 +31,7 @@ public class TaskServiceImpl implements TaskService {
     public TaskDto getById(Long id) {
         return taskRepository.findById(id)
                     .stream()
-                    .map(task -> taskMapper.toTaskDto(task))
+                    .map(task -> taskMapper.entityToDto(task))
                     .findFirst()
                     .orElseThrow(() -> new NotFoundException(id));
     }
@@ -39,10 +39,10 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public TaskDto add(TaskDto dto) {
         Task newTask = taskRepository.save(
-            taskMapper.toTask(dto)
+            taskMapper.dtoToEntity(dto)
         );
 
-        return taskMapper.toTaskDto(newTask);
+        return taskMapper.entityToDto(newTask);
     }
 
     @Override
@@ -51,13 +51,14 @@ public class TaskServiceImpl implements TaskService {
                     .map(task -> {
                         task.setTitle(dto.getTitle());
                         Task updatedTask = taskRepository.save(task);
-                        return taskMapper.toTaskDto(updatedTask);
+                        return taskMapper.entityToDto(updatedTask);
                     })
                     .orElseGet(() -> {
                         Task taskToAdd = new Task();
                         taskToAdd.setTitle(dto.getTitle());
+                        taskToAdd.setDescription(dto.getDescription());
                         Task newTask = taskRepository.save(taskToAdd);
-                        return taskMapper.toTaskDto(newTask);
+                        return taskMapper.entityToDto(newTask);
                     });
     }
 

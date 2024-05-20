@@ -3,8 +3,6 @@ package io.github.sploit.projects.taskmanager.common.entities;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -22,10 +20,8 @@ public class BaseEntity implements Serializable {
     private Long id;
 
     @Column(name = "created_at", updatable = false)
-    @DateTimeFormat(pattern = "dd-MM-yyyy")
     private LocalDate createDate;
 
     @Column(name = "updated_at")
-    @DateTimeFormat(pattern = "dd-MM-yyyy")
-    private LocalDate updateDate;
+    private LocalDate updateDate = LocalDate.now();
 }
