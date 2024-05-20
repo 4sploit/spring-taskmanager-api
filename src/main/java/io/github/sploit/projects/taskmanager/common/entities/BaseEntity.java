@@ -23,5 +23,5 @@ public class BaseEntity implements Serializable {
     private LocalDate createDate;
 
     @Column(name = "updated_at")
-    private LocalDate updateDate = LocalDate.now();
+    private LocalDate updateDate;
 }

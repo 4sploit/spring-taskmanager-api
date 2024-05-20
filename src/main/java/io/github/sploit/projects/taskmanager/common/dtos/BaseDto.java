@@ -17,5 +17,5 @@ public class BaseDto {
     private LocalDate createdAt;
 
     @JsonProperty(value = "updatedAt", access = JsonProperty.Access.READ_ONLY)
-    private LocalDate updatedAt;
+    private LocalDate updatedAt = LocalDate.now();
 }
