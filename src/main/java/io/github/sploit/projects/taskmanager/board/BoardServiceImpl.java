@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
-import io.github.sploit.projects.taskmanager.common.exceptions.NotFoundException;
+import io.github.sploit.projects.taskmanager.common.exceptions.ItemNotFoundException;
 
 @Service
 public class BoardServiceImpl implements BoardService {
@@ -35,7 +35,7 @@ public class BoardServiceImpl implements BoardService {
                 .stream()
                 .map(board -> boardMapper.entityToDto(board))
                 .findFirst()
-                .orElseThrow(() -> new NotFoundException(id));
+                .orElseThrow(() -> new ItemNotFoundException(id));
     }
 
     @Override

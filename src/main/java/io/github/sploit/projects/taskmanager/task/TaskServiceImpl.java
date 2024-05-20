@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
-import io.github.sploit.projects.taskmanager.common.exceptions.NotFoundException;
+import io.github.sploit.projects.taskmanager.common.exceptions.ItemNotFoundException;
 
 @Service
 public class TaskServiceImpl implements TaskService {
@@ -33,7 +33,7 @@ public class TaskServiceImpl implements TaskService {
                 .stream()
                 .map(task -> taskMapper.entityToDto(task))
                 .findFirst()
-                .orElseThrow(() -> new NotFoundException(id));
+                .orElseThrow(() -> new ItemNotFoundException(id));
     }
 
     @Override
