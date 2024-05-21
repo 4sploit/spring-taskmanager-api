@@ -10,12 +10,12 @@ import lombok.Setter;
 @Getter
 @Setter
 public class BaseDto {
-    @JsonProperty(value = "id", access = JsonProperty.Access.READ_ONLY)
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Long id;
 
-    @JsonProperty(value = "createdAt", access = JsonProperty.Access.READ_ONLY)
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private LocalDate createdAt;
 
-    @JsonProperty(value = "updatedAt", access = JsonProperty.Access.READ_ONLY)
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private LocalDate updatedAt = LocalDate.now();
 }
