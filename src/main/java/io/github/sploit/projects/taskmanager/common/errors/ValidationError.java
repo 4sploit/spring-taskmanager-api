@@ -12,7 +12,7 @@ import lombok.Setter;
 @Setter
 public class ValidationError {
     @JsonProperty
-    private final String title = ErrorTitles.VALIDATION_ERROR_TITLE;
+    private final String title = ErrorTitles.VALIDATION;
     @JsonProperty("error_details")
     private Set<ErrorDetails> errorDetails;
 }
