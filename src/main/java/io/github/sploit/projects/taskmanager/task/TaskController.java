@@ -2,6 +2,7 @@ package io.github.sploit.projects.taskmanager.task;
 
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,34 +14,40 @@ public class TaskController implements TaskApiController {
     TaskController(TaskService taskService) {
         this.taskService = taskService;
     }
-    
+
     @Override
-    public List<TaskDto> getAll() {
-        return taskService.getAll();
+    public ResponseEntity<List<TaskDto>> getAll() {
+        List<TaskDto> tasks = taskService.getAll();
+        return ResponseEntity.ok(tasks);
     }
 
     @Override
-    public TaskDto getById(Long id) {
-        return taskService.getById(id);
+    public ResponseEntity<TaskDto> getById(Long id) {
+        TaskDto task = taskService.getById(id);
+        return ResponseEntity.ok(task);
     }
 
     @Override
-    public TaskDto add(TaskDto req) {
-        return taskService.add(req);
+    public ResponseEntity<TaskDto> add(TaskDto req) {
+        TaskDto newTask = taskService.add(req);
+        return ResponseEntity.ok(newTask);
     }
 
     @Override
-    public TaskDto update(Long id, TaskDto req) {
-        return taskService.update(id, req);
+    public ResponseEntity<TaskDto> update(Long id, TaskDto req) {
+        TaskDto updatedTask = taskService.update(id, req);
+        return ResponseEntity.ok(updatedTask);
     }
 
     @Override
-    public Boolean deleteById(Long id) {
-        return taskService.deleteById(id);
+    public ResponseEntity<Boolean> deleteById(Long id) {
+        boolean isDeleted = taskService.deleteById(id);
+        return ResponseEntity.ok(isDeleted);
     }
 
     @Override
-    public List<TaskDto> getByTaskId(Long taskId) {
-        return taskService.getByListId(taskId);
+    public ResponseEntity<List<TaskDto>> getByListId(Long listId) {
+        List<TaskDto> tasksOfList = taskService.getByListId(listId);
+        return ResponseEntity.ok(tasksOfList);
     }
 }

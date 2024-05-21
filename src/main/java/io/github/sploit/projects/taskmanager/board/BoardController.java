@@ -2,6 +2,7 @@ package io.github.sploit.projects.taskmanager.board;
 
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,29 +14,34 @@ public class BoardController implements BoardApiController {
     BoardController(BoardService boardService) {
         this.boardService = boardService;
     }
-    
+
     @Override
-    public List<BoardDto> getAll() {
-        return boardService.getAll();
+    public ResponseEntity<List<BoardDto>> getAll() {
+        List<BoardDto> boards = boardService.getAll();
+        return ResponseEntity.ok(boards);
     }
 
     @Override
-    public BoardDto getById(Long id) {
-        return boardService.getById(id);
+    public ResponseEntity<BoardDto> getById(Long id) {
+        BoardDto board = boardService.getById(id);
+        return ResponseEntity.ok(board);
     }
 
     @Override
-    public BoardDto add(BoardDto req) {
-        return boardService.add(req);
+    public ResponseEntity<BoardDto> add(BoardDto req) {
+        BoardDto newBoard = boardService.add(req);
+        return ResponseEntity.ok(newBoard);
     }
 
     @Override
-    public BoardDto update(Long id, BoardDto req) {
-        return boardService.update(id, req);
+    public ResponseEntity<BoardDto> update(Long id, BoardDto req) {
+        BoardDto updatedBoard = boardService.update(id, req);
+        return ResponseEntity.ok(updatedBoard);
     }
 
     @Override
-    public Boolean deleteById(Long id) {
-        return boardService.deleteById(id);
+    public ResponseEntity<Boolean> deleteById(Long id) {
+        boolean isDeleted = boardService.deleteById(id);
+        return ResponseEntity.ok(isDeleted);
     }
 }

@@ -2,6 +2,7 @@ package io.github.sploit.projects.taskmanager.list;
 
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,29 +14,34 @@ public class ListController implements ListApiController {
     ListController(ListService listService) {
         this.listService = listService;
     }
-    
+
     @Override
-    public List<ListDto> getAll() {
-        return listService.getAll();
+    public ResponseEntity<List<ListDto>> getAll() {
+        List<ListDto> lists = listService.getAll();
+        return ResponseEntity.ok(lists);
     }
 
     @Override
-    public ListDto getById(Long id) {
-        return listService.getById(id);
+    public ResponseEntity<ListDto> getById(Long id) {
+        ListDto list = listService.getById(id);
+        return ResponseEntity.ok(list);
     }
 
     @Override
-    public ListDto add(ListDto req) {
-        return listService.add(req);
+    public ResponseEntity<ListDto> add(ListDto req) {
+        ListDto newList = listService.add(req);
+        return ResponseEntity.ok(newList);
     }
 
     @Override
-    public ListDto update(Long id, ListDto req) {
-        return listService.update(id, req);
+    public ResponseEntity<ListDto> update(Long id, ListDto req) {
+        ListDto updatedList = listService.update(id, req);
+        return ResponseEntity.ok(updatedList);
     }
 
     @Override
-    public Boolean deleteById(Long id) {
-        return listService.deleteById(id);
+    public ResponseEntity<Boolean> deleteById(Long id) {
+        boolean isDeleted = listService.deleteById(id);
+        return ResponseEntity.ok(isDeleted);
     }
 }
