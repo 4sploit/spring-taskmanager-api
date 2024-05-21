@@ -4,8 +4,6 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
-import io.github.sploit.projects.taskmanager.common.exceptions.ItemNotFoundException;
-
 @Service
 public class ListServiceImpl implements ListService {
     private final ListRepository listRepository;
@@ -32,7 +30,7 @@ public class ListServiceImpl implements ListService {
                 .stream()
                 .map(listMapper::entityToDto)
                 .findFirst()
-                .orElseThrow(() -> new ItemNotFoundException(id));
+                .orElseThrow(() -> new ListNotFoundException(id));
     }
 
     @Override
