@@ -13,9 +13,9 @@ public class BaseDto {
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Long id;
 
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    @JsonProperty(value = "created_at", access = JsonProperty.Access.READ_ONLY)
     private LocalDate createdAt;
 
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    @JsonProperty(value = "updated_at", access = JsonProperty.Access.READ_ONLY)
     private LocalDate updatedAt = LocalDate.now();
 }
