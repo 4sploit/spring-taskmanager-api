@@ -4,4 +4,5 @@ public final class ErrorTitles {
     private ErrorTitles(){}
 
     public static final String VALIDATION = "Validation Error";
+    public static final String GENERAL = "General Error";
 }
