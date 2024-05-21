@@ -16,4 +16,6 @@ import lombok.ToString;
 public class Task extends TitledEntity {
     @Column(name = "description")
     private String description;
+    @Column(name = "list_id")
+    private Long listId;
 }

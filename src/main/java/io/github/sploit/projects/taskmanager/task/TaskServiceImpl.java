@@ -65,4 +65,12 @@ public class TaskServiceImpl implements TaskService {
         taskRepository.deleteById(id);
         return taskRepository.existsById(id);
     }
+
+    @Override
+    public List<TaskDto> getByListId(Long listId) {
+        return taskRepository.findByListId(listId)
+                .stream()
+                .map(taskMapper::entityToDto)
+                .collect(Collectors.toList());
+    }
 }
