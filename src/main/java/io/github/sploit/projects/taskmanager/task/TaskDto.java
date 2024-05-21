@@ -11,4 +11,6 @@ import lombok.Setter;
 public class TaskDto extends TitledDto {
     @JsonProperty("description")
     private String description;
+    @JsonProperty(value = "listId", required = true)
+    private Long listId;
 }

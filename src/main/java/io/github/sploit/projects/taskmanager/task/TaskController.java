@@ -38,4 +38,9 @@ public class TaskController implements TaskApiController {
     public Boolean deleteById(Long id) {
         return taskService.deleteById(id);
     }
+
+    @Override
+    public List<TaskDto> getByTaskId(Long taskId) {
+        return taskService.getByListId(taskId);
+    }
 }
