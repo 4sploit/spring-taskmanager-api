@@ -23,7 +23,7 @@ public class TaskServiceImpl implements TaskService {
     public List<TaskDto> getAll() {
         return taskRepository.findAll()
                 .stream()
-                .map(task -> taskMapper.entityToDto(task))
+                .map(taskMapper::entityToDto)
                 .collect(Collectors.toList());
     }
 
@@ -31,7 +31,7 @@ public class TaskServiceImpl implements TaskService {
     public TaskDto getById(Long id) {
         return taskRepository.findById(id)
                 .stream()
-                .map(task -> taskMapper.entityToDto(task))
+                .map(taskMapper::entityToDto)
                 .findFirst()
                 .orElseThrow(() -> new ItemNotFoundException(id));
     }

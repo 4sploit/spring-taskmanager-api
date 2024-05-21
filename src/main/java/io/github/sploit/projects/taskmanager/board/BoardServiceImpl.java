@@ -23,9 +23,7 @@ public class BoardServiceImpl implements BoardService {
     public List<BoardDto> getAll() {
         return boardRepository.findAll()
                 .stream()
-                .map(board -> {
-                    return boardMapper.entityToDto(board);
-                })
+                .map(boardMapper::entityToDto)
                 .collect(Collectors.toList());
     }
 
@@ -33,7 +31,7 @@ public class BoardServiceImpl implements BoardService {
     public BoardDto getById(Long id) {
         return boardRepository.findById(id)
                 .stream()
-                .map(board -> boardMapper.entityToDto(board))
+                .map(boardMapper::entityToDto)
                 .findFirst()
                 .orElseThrow(() -> new ItemNotFoundException(id));
     }
