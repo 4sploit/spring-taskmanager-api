@@ -5,11 +5,9 @@ import java.util.List;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.github.sploit.projects.taskmanager.common.controllers.ApiController;
-
 @RestController
 @RequestMapping("/api/task")
-public class TaskController implements ApiController<TaskDto, TaskDto, Long> {
+public class TaskController implements TaskApiController {
     private final TaskService taskService;
 
     TaskController(TaskService taskService) {

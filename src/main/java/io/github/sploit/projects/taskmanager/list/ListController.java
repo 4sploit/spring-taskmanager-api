@@ -5,11 +5,9 @@ import java.util.List;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.github.sploit.projects.taskmanager.common.controllers.ApiController;
-
 @RestController
 @RequestMapping("/api/list")
-public class ListController implements ApiController<ListDto, ListDto, Long> {
+public class ListController implements ListApiController {
     private final ListService listService;
 
     ListController(ListService listService) {

@@ -5,11 +5,9 @@ import java.util.List;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.github.sploit.projects.taskmanager.common.controllers.ApiController;
-
 @RestController
 @RequestMapping("/api/board")
-public class BoardController implements ApiController<BoardDto, BoardDto, Long> {
+public class BoardController implements BoardApiController {
     private final BoardService boardService;
 
     BoardController(BoardService boardService) {
