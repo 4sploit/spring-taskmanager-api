@@ -17,11 +17,11 @@ public interface ApiController<Request extends BaseDto, Response extends BaseDto
     @GetMapping("/getAll")
     ResponseEntity<List<Response>> getAll();
     @GetMapping("/getById/{id}")
-    ResponseEntity<Response> getById(ID id);
+    ResponseEntity<Response> getById(@PathVariable ID id);
     @PostMapping("/add")
     ResponseEntity<Response> add(@Valid @RequestBody Request req);
     @PutMapping("/update/{id}")
     ResponseEntity<Response> update(@PathVariable Long id, @Valid @RequestBody Request req);
     @DeleteMapping("/deleteById/{id}")
-    ResponseEntity<Boolean> deleteById(ID id);
+    ResponseEntity<Boolean> deleteById(@PathVariable ID id);
 }
