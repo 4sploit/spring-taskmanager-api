@@ -23,8 +23,9 @@ public class ListController implements ListApiController {
 
     @Override
     public ResponseEntity<ListDto> getById(Long id) {
-        ListDto list = listService.getById(id);
-        return ResponseEntity.ok(list);
+        return listService.getById(id)
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @Override

@@ -23,8 +23,10 @@ public class BoardController implements BoardApiController {
 
     @Override
     public ResponseEntity<BoardDto> getById(Long id) {
-        BoardDto board = boardService.getById(id);
-        return ResponseEntity.ok(board);
+        return boardService.getById(id)
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
+
     }
 
     @Override

@@ -1,5 +1,6 @@
 package io.github.sploit.projects.taskmanager.list;
 
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
@@ -25,12 +26,11 @@ public class ListServiceImpl implements ListService {
     }
 
     @Override
-    public ListDto getById(Long id) {
+    public Optional<ListDto> getById(Long id) {
         return listRepository.findById(id)
                 .stream()
                 .map(listMapper::entityToDto)
-                .findFirst()
-                .orElseThrow(() -> new ListNotFoundException(id));
+                .findFirst();
     }
 
     @Override

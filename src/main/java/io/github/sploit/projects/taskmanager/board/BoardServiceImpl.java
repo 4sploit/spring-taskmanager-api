@@ -1,6 +1,7 @@
 package io.github.sploit.projects.taskmanager.board;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
@@ -26,12 +27,11 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public BoardDto getById(Long id) {
+    public Optional<BoardDto> getById(Long id) {
         return boardRepository.findById(id)
                 .stream()
                 .map(boardMapper::entityToDto)
-                .findFirst()
-                .orElseThrow(() -> new BoardNotFoundException(id));
+                .findFirst();
     }
 
     @Override

@@ -1,6 +1,7 @@
 package io.github.sploit.projects.taskmanager.task;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
@@ -26,12 +27,11 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public TaskDto getById(Long id) {
+    public Optional<TaskDto> getById(Long id) {
         return taskRepository.findById(id)
                 .stream()
                 .map(taskMapper::entityToDto)
-                .findFirst()
-                .orElseThrow(() -> new TaskNotFoundException(id));
+                .findFirst();
     }
 
     @Override
