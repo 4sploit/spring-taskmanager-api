@@ -1,26 +1,28 @@
 package io.github.sploit.projects.taskmanager.common.advices;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.util.Locale;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-
-import io.github.sploit.projects.taskmanager.common.constants.ErrorTitles;
-import io.github.sploit.projects.taskmanager.common.errors.GeneralError;
+import io.github.sploit.projects.taskmanager.common.constants.ErrorKeys;
+import io.github.sploit.projects.taskmanager.common.constants.ErrorMessages;
+import io.github.sploit.projects.taskmanager.common.errors.ApiError;
+import io.github.sploit.projects.taskmanager.common.utils.LocaleUtil;
 
 @RestControllerAdvice
 public class GeneralErrorAdvice {
-    Logger logger = LoggerFactory.getLogger(GeneralErrorAdvice.class);
+    private final LocaleUtil localeUtil;
+
+    public GeneralErrorAdvice(LocaleUtil localeUtil) {
+        this.localeUtil = localeUtil;
+    }
 
     @ExceptionHandler(value = {DataAccessException.class})
-	ResponseEntity<Object> generalErrorAdviceHandler(Exception ex) {
-        logger.error(ErrorTitles.GENERAL, ex);
-
-        return ResponseEntity.internalServerError()
-                .body(
-                    GeneralError.builder().build()
-                );
-	}
+    ResponseEntity<Object> generalErrorAdviceHandler(Exception ex) {
+        return ResponseEntity.internalServerError().body(ApiError.builder()
+                .key(localeUtil.getMessage(ErrorKeys.GENERAL_ERROR, Locale.getDefault()))
+                .message(localeUtil.getMessage(ErrorMessages.GENERAL_ERROR, Locale.getDefault()))
+                .build());
+    }
 }

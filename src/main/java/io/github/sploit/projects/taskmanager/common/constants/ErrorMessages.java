@@ -3,5 +3,6 @@ package io.github.sploit.projects.taskmanager.common.constants;
 public final class ErrorMessages {
     private ErrorMessages() {}
 
-    public static String GENERAL_ERROR = "An error occurred. Please try again later.";
+    public static final String GENERAL_ERROR = "error.message.GENERAL_ERROR";
+    public static final String VALIDATION_ERROR = "error.message.VALIDATION_ERROR";
 }

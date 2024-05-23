@@ -4,15 +4,16 @@ import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import io.github.sploit.projects.taskmanager.common.constants.ErrorTitles;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Builder;
 
-@Getter
-@Setter
-public class ValidationError {
+@Builder
+public class ApiError {
     @JsonProperty
-    private final String title = ErrorTitles.VALIDATION;
+    private String key;
+
+    @JsonProperty
+    private String message;
+
     @JsonProperty("error_details")
     private Set<ErrorDetails> errorDetails;
 }
