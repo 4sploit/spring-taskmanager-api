@@ -1,5 +1,11 @@
 server:
   port: ${SERVER_PORT:4444}
+  ssl:
+    enabled: true
+    key-alias: taskmanager
+    key-store: classpath:taskmanager-keystore.p12
+    key-store-password: secret
+    key-store-type: PKCS12
 
 app:
   locale:
