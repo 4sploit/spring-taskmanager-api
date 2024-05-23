@@ -19,3 +19,8 @@ app:
     cookie-duration-in-hours: ${LOCALE_COOKIE_DURATION_IN_HOURS:24}
     basename: ${LOCALE_MESSAGES_PATH:messages/messages}
     use-message-code-as-default-message: false
+
+okta:
+  oauth2:
+    issuer: domain
+    audience: identifier
