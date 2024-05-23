@@ -1,10 +1,8 @@
 package io.github.sploit.projects.taskmanager.common.advices;
 
-import java.util.Locale;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -26,7 +24,6 @@ public class FieldNotValidAdvice {
 
         @ExceptionHandler(MethodArgumentNotValidException.class)
         ResponseEntity<ApiError> fieldNotValidAdviceHandler(MethodArgumentNotValidException ex) {
-                Locale currentLocale = LocaleContextHolder.getLocale();
                 Set<ErrorDetails> errors = ex.getBindingResult().getFieldErrors().stream()
                                 .map(err -> ErrorDetails.builder().fieldName(err.getField())
                                                 .message(err.getDefaultMessage()).build())
@@ -34,7 +31,7 @@ public class FieldNotValidAdvice {
 
                 return ResponseEntity.badRequest().body(ApiError.builder()
                                 .key(localeUtil.getMessage(ErrorKeys.VALIDATION_ERROR))
-                                .message(localeUtil.getMessage(ErrorMessages.VALIDATION_ERROR, currentLocale))
+                                .message(localeUtil.getMessage(ErrorMessages.VALIDATION_ERROR))
                                 .errorDetails(errors).build());
         }
 }

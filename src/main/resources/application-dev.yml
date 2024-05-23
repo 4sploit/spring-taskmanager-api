@@ -1,2 +1,6 @@
 server:
   port: ${SERVER_PORT:4444}
+
+app:
+  locale:
+    use-message-code-as-default-message: true

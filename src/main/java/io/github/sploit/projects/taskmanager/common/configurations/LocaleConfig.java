@@ -2,6 +2,7 @@ package io.github.sploit.projects.taskmanager.common.configurations;
 
 import java.time.Duration;
 import java.util.Locale;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
@@ -24,33 +25,41 @@ public class LocaleConfig implements WebMvcConfigurer {
     @Bean
     public LocaleResolver localeResolver() {
         CookieLocaleResolver cookieLocaleResolver = new CookieLocaleResolver();
+
         cookieLocaleResolver.setDefaultLocale(Locale.forLanguageTag(localeProperties.getLang()));
         cookieLocaleResolver
                 .setCookieMaxAge(Duration.ofHours(localeProperties.getCookieDurationInHours()));
+
         return cookieLocaleResolver;
     }
 
     @Bean
     public ReloadableResourceBundleMessageSource messageSource() {
-        ReloadableResourceBundleMessageSource messageSource =
-                new ReloadableResourceBundleMessageSource();
-        messageSource.setBasename("classpath:"+localeProperties.getBasename());
+        ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
+
+        messageSource.setBasename("classpath:" + localeProperties.getBasename());
         messageSource.setDefaultEncoding("UTF-8");
         messageSource.setDefaultLocale(Locale.forLanguageTag(localeProperties.getLang()));
+        messageSource.setUseCodeAsDefaultMessage(localeProperties.isUseMessageCodeAsDefaultMessage());
+
         return messageSource;
     }
 
     @Bean
     public LocalValidatorFactoryBean validator() {
         LocalValidatorFactoryBean validatorFactoryBean = new LocalValidatorFactoryBean();
+
         validatorFactoryBean.setValidationMessageSource(messageSource());
+
         return validatorFactoryBean;
     }
 
     @Bean
     public LocaleChangeInterceptor localeChangeInterceptor() {
         LocaleChangeInterceptor localeChangeInterceptor = new LocaleChangeInterceptor();
+
         localeChangeInterceptor.setParamName("lang");
+
         return localeChangeInterceptor;
     }
 

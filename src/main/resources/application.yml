@@ -18,3 +18,4 @@ app:
     lang: en
     cookie-duration-in-hours: 48
     basename: "messages/messages"
+    use-message-code-as-default-message: false
