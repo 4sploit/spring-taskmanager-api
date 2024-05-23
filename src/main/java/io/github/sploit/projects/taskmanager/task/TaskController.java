@@ -23,8 +23,9 @@ public class TaskController implements TaskApiController {
 
     @Override
     public ResponseEntity<TaskDto> getById(Long id) {
-        TaskDto task = taskService.getById(id);
-        return ResponseEntity.ok(task);
+        return taskService.getById(id)
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @Override
