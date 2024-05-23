@@ -1,0 +1,17 @@
+{"properties": [
+  {
+    "name": "app.locale.lang",
+    "type": "java.lang.String",
+    "description": "Language code for the application."
+  },
+  {
+    "name": "app.locale.basename",
+    "type": "java.lang.String",
+    "description": "Base name for message properties files."
+  },
+  {
+    "name": "app.locale.cookie-duration-in-hours",
+    "type": "java.lang.String",
+    "description": "A description for 'app.locale.cookie-duration-in-hours'"
+  }
+]}

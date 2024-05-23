@@ -12,3 +12,9 @@ spring:
     open-in-view: false
   # jackson:
   #   default-property-inclusion: non-null
+
+app:
+  locale:
+    lang: en
+    cookie-duration-in-hours: 48
+    basename: "messages/messages"
