@@ -10,3 +10,8 @@ server:
 app:
   locale:
     use-message-code-as-default-message: true
+
+okta:
+  oauth2:
+    issuer: domain
+    audience: identifier
