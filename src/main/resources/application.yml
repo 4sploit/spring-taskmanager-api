@@ -22,5 +22,12 @@ app:
 
 okta:
   oauth2:
-    issuer: domain
-    audience: identifier
+    issuer: ${okta-domain:domain}
+    audience: ${okta-identifier:https://localhost:8080}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+      base-path: /manage
