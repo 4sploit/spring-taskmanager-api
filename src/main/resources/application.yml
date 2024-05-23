@@ -10,13 +10,6 @@ spring:
     hibernate:
       ddl-auto: update
     open-in-view: false
-  security:
-    oauth2:
-      client:
-        registration:
-          google:
-            client-id: google-client-id
-            client-secret: google-client-secret
   # jackson:
   #   default-property-inclusion: non-null
 
