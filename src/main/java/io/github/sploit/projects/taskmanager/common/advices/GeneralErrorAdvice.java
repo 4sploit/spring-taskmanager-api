@@ -1,5 +1,6 @@
 package io.github.sploit.projects.taskmanager.common.advices;
 
+import org.springframework.beans.TypeMismatchException;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -18,7 +19,7 @@ public class GeneralErrorAdvice {
         this.localeUtil = localeUtil;
     }
 
-    @ExceptionHandler(value = {DataAccessException.class})
+    @ExceptionHandler(value = {DataAccessException.class, TypeMismatchException.class})
     ResponseEntity<Object> generalErrorAdviceHandler(Exception ex) {
         return ResponseEntity.internalServerError().body(ApiError.builder()
                 .key(localeUtil.getMessage(ErrorKeys.GENERAL_ERROR))
