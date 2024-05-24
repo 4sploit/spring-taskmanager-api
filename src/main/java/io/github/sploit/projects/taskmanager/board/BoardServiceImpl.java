@@ -4,9 +4,13 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 @Service
+@CacheConfig(cacheNames =  "boards")
 public class BoardServiceImpl implements BoardService {
     private final BoardRepository boardRepository;
     private final BoardMapper boardMapper;
@@ -19,6 +23,7 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
+    @Cacheable
     public List<BoardDto> getAll() {
         return boardRepository.findAll()
                 .stream()
@@ -27,6 +32,7 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
+    @Cacheable(key = "#id")
     public Optional<BoardDto> getById(Long id) {
         return boardRepository.findById(id)
                 .stream()
@@ -35,6 +41,7 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
+    @CacheEvict(key = "#newBoard.id")
     public BoardDto add(BoardDto dto) {
         Board newBoard = boardRepository.save(
                 boardMapper.dtoToEntity(dto));
@@ -43,6 +50,7 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
+    @CacheEvict(key = "#id")
     public BoardDto update(Long id, BoardDto dto) {
         return boardRepository.findById(id)
                 .map(board -> {
@@ -59,6 +67,7 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
+    @CacheEvict(key = "#id")
     public Boolean deleteById(Long id) {
         boardRepository.deleteById(id);
         return boardRepository.existsById(id);

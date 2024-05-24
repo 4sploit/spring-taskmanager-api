@@ -4,9 +4,13 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 @Service
+@CacheConfig(cacheNames = "tasks")
 public class TaskServiceImpl implements TaskService {
     private final TaskRepository taskRepository;
     private final TaskMapper taskMapper;
@@ -19,6 +23,7 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
+    @Cacheable
     public List<TaskDto> getAll() {
         return taskRepository.findAll()
                 .stream()
@@ -27,6 +32,7 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
+    @Cacheable(key = "#id")
     public Optional<TaskDto> getById(Long id) {
         return taskRepository.findById(id)
                 .stream()
@@ -35,6 +41,7 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
+    @CacheEvict(key = "#newTask.id")
     public TaskDto add(TaskDto dto) {
         Task newTask = taskRepository.save(
                 taskMapper.dtoToEntity(dto));
@@ -43,6 +50,7 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
+    @CacheEvict(key = "#id")
     public TaskDto update(Long id, TaskDto dto) {
         return taskRepository.findById(id)
                 .map(task -> {
@@ -59,12 +67,14 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
+    @CacheEvict(key = "#id")
     public Boolean deleteById(Long id) {
         taskRepository.deleteById(id);
         return taskRepository.existsById(id);
     }
 
     @Override
+    @Cacheable(key = "#listId")
     public List<TaskDto> getByListId(Long listId) {
         return taskRepository.findByListId(listId)
                 .stream()
