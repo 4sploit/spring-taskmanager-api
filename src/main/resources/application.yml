@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: "dev,mysql,locale,okta,actuator"
+    active: "dev,mysql,flyway,locale,okta,actuator"
   application:
     name: ${APP_NAME:taskmanager}
   data:
@@ -8,7 +8,8 @@ spring:
       basePath: ${API_BASE_PATH:/api}
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: validate
     open-in-view: false
+
   # jackson:
   #   default-property-inclusion: non-null
