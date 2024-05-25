@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: "dev,mysql"
+    active: "dev,mysql,locale,okta,actuator"
   application:
     name: ${APP_NAME:taskmanager}
   data:
@@ -12,22 +12,3 @@ spring:
     open-in-view: false
   # jackson:
   #   default-property-inclusion: non-null
-
-app:
-  locale:
-    lang: ${APP_DEFAULT_LANGUAGE:en}
-    cookie-duration-in-hours: ${LOCALE_COOKIE_DURATION_IN_HOURS:24}
-    basename: ${LOCALE_MESSAGES_PATH:messages/messages}
-    use-message-code-as-default-message: false
-
-okta:
-  oauth2:
-    issuer: ${okta-domain:domain}
-    audience: ${okta-identifier:https://localhost:8080}
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: '*'
-      base-path: /manage
