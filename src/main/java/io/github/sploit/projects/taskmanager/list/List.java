@@ -1,6 +1,7 @@
 package io.github.sploit.projects.taskmanager.list;
 
-import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import io.github.sploit.projects.taskmanager.common.entities.TitledEntity;
 import io.github.sploit.projects.taskmanager.task.Task;
@@ -26,7 +27,7 @@ import lombok.ToString;
 public class List extends TitledEntity {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "list_id")
-    private java.util.List<Task> tasks = new ArrayList<>();
+    private Set<Task> tasks = new HashSet<>();
     @Column(name = "board_id")
     private Long boardId;
 }
